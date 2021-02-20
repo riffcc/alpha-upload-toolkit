@@ -1,0 +1,166 @@
+program UploadHelper;
+// Version 1.0.0-alpha
+// Copyright 2021, Riff.CC Foundation
+// This program is free software made available under the MIT Licence.
+// This forms part of the Riff.CC Upload Toolkit.
+// It is intended to assist you in uploading large quantities of content to RCC
+// with as little manual labour as possible.
+// Report any bugs or grumbles to benjamin@riff.cc - thanks!
+
+procedure PressTab;
+begin
+  VKeyDown(VK_TAB);
+  sleep(120);     
+  VKeyUp(VK_TAB);  
+  sleep(20);    
+end;                        
+
+begin
+repeat
+// click Choose File
+moveMouse(101,513);
+sleep(5);
+clickMouse(101,513, false);
+sleep(300); 
+// remove old file
+moveMouse(233,144);
+sleep(20);
+clickMouse(233,144, true);
+sleep(200);
+clickMouse(310,510, false);
+sleep(100);
+// click file     
+moveMouse(233,144);
+sleep(200);
+clickMouse(233,144, false);
+sleep(200);                    
+clickMouse(233,144, false);
+sleep(300);  
+writeln('hello');     
+// grab movie name  
+clickMouse(122,612, false);
+sleep(400);
+VKeyDown(VK_LCONTROL);
+VKeyDown(CharToVKey('a'));
+VKeyUp(CharToVKey('a'));
+VKeyUp(VK_LCONTROL);
+sleep(300);
+VKeyDown(VK_LCONTROL);
+VKeyDown(CharToVKey('c'));
+VKeyUp(CharToVKey('c'));
+VKeyUp(VK_LCONTROL);    
+WriteLn(GetClipboard);
+sleep(300);
+// go search for the thing
+// -> move to search box
+MoveMouse(906,167);
+sleep(50);
+ClickMouse(906,167, false);
+sleep(100);
+
+// -> select and delete existing content
+ClickMouse(906,167, false);
+sleep(50);
+VKeyDown(VK_LCONTROL);
+VKeyDown(CharToVKey('a'));
+VKeyUp(CharToVKey('a'));
+VKeyUp(VK_LCONTROL);  
+
+VKeyDown(8);
+VKeyUp(8);
+
+// -> paste our title to search
+sleep(50);
+VKeyDown(VK_LCONTROL);
+VKeyDown(CharToVKey('v'));
+VKeyUp(CharToVKey('v'));
+VKeyUp(VK_LCONTROL);  
+
+// -> hit enter       
+VKeyDown(VK_RETURN);
+VKeyUp(VK_RETURN); 
+
+writeln('Please copy the ID of the movie');
+
+repeat
+  sleep(40);     
+  writeln('Loop');
+until (GetKeyState(VK_F4));
+
+writeln('Loop broken');
+
+// select formats  
+MoveMouse(100,720);
+ClickMouse(100,720, false);
+sleep(20);   
+PressKey('w');    
+sleep(50);
+
+VKeyDown(VK_RETURN);
+VKeyUp(VK_RETURN); 
+
+sleep(50);
+PressTab();     
+PressKey('o');
+PressTab();    
+
+// insert the TMDB ID
+sleep(50);                     
+VKeyDown(VK_LCONTROL);
+VKeyDown(CharToVKey('v'));
+VKeyUp(CharToVKey('v'));
+VKeyUp(VK_LCONTROL); 
+
+// get ready to insert the description
+PressTab(); 
+PressTab(); 
+PressTab(); 
+PressTab(); 
+PressTab();       
+
+repeat
+  sleep(40);     
+  writeln('Loop');
+until (GetKeyState(VK_F4));
+
+writeln('Loop broken');
+
+
+// insert the description
+MoveMouse(380,690);
+sleep(100);
+ClickMouse(380,690, false);
+sleep(150);                     
+VKeyDown(VK_LCONTROL);
+VKeyDown(CharToVKey('v'));
+VKeyUp(CharToVKey('v'));
+VKeyUp(VK_LCONTROL);       
+sleep(400);
+
+// fix the description
+VKeyDown(8);  
+VKeyUp(8);
+sleep(60);
+VKeyDown(8);  
+VKeyUp(8);
+sleep(60);
+
+writeln('Finish the upload!');
+
+repeat
+  sleep(40);     
+  writeln('Loop');
+until (GetKeyState(VK_F4));
+
+// return to upload page
+MoveMouse(20,206);
+sleep(50);
+ClickMouse(84,238, false);
+sleep(100);
+
+ClickMouse(790,60, false);
+sleep(50);
+
+sleep(800);      
+until false;
+end.                        
