@@ -1,4 +1,7 @@
 #/bin/bash
+# This helper script is to be used purely for manually uploading movies, TV shows and videos.
+# You should use the automated scripts instead (if available, and if at all possible).
+
 IFS=$'\n'
 
 for x in *.torrent; do
