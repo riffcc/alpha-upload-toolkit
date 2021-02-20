@@ -2,11 +2,18 @@
 # Set the current date
 timestamp=$(date +"%F-T%H.%M.%S")
 
+if [ -z "$1" ] || [ -z "$2" ]
+then
+	echo "Please provide a starting and ending page in the RSS feed."
+	echo "Exiting..."
+	exit 1
+fi
+
 # Switch to the appropriate directory.
 cd librivox
 echo "Thanks for using Riff.CC Upload Toolkit!"
 # Loop through as many pages as you would like.
-for i in {1}
+for i in {$1 $2}
 do
 	echo "Grabbing a list of torrent URLs."
         # Grab a list of torrent URLs from our source.
