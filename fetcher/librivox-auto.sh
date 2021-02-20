@@ -2,6 +2,12 @@
 # Set the current date
 timestamp=$(date +"%F-T%H.%M.%S")
 
+echo $1
+echo $2
+set -x
+
+# Check if no numbers were provided.
+
 if [ -z "$1" ] || [ -z "$2" ]
 then
 	echo "Please provide a starting and ending page in the RSS feed."
@@ -9,11 +15,23 @@ then
 	exit 1
 fi
 
+# Check if the provided values are actually numbers.
+case $1 in
+    '' | *[!0123456789]*)
+        printf '%s\n' "$0: $var: invalid digit" >&2; exit 1;;
+esac
+
+case $2 in
+    '' | *[!0123456789]*)
+        printf '%s\n' "$0: $var: invalid digit" >&2; exit 1;;
+esac
+
+
 # Switch to the appropriate directory.
 cd librivox
 echo "Thanks for using Riff.CC Upload Toolkit!"
 # Loop through as many pages as you would like.
-for i in {$1 $2}
+for (( i = $1; i <= $2; ++i ));
 do
 	echo "Grabbing a list of torrent URLs."
         # Grab a list of torrent URLs from our source.
