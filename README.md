@@ -7,7 +7,7 @@ Used for automating the uploads process. This is only needed if you are uploadin
 ## Linux
 Start by changing "replacemewithyourkey" with your announce key. You can find it on the Upload page! Then create ~/processing and ~/processing2.
 
-Make sure you have a recent version of mktorrent installed.
+Make sure you have a recent version of mktorrent installed. Then copy mktorrent.sh to ~ and make it executable.
 
 create-everything.sh can be used for creating massive amounts of torrents from anything stored in folders.
 
