@@ -33,7 +33,7 @@ do
 		sourceTitle=$(wget -qO- "https://archive.org/details/$sourceName" | grep "<title>" | sed 's/    <title>//; s/:/by/ ; s/ : Free Download, Borrow, and Streaming : Internet Archive<\/title>// ')
                 # Run the special API upload script using our params
 		echo "Creating upload command in uploads.txt"
-                bash ../apiup-auto.sh "$torrentFilename" "https://archive.org/details/$sourceName" "$sourceTitle" >> uploads-"$timestamp".txt
+                bash ~/upload-toolkit/fetcher/apiup-auto.sh "$torrentFilename" "https://archive.org/details/$sourceName" "$sourceTitle" >> uploads-"$timestamp".txt
 		echo >> uploads-"$timestamp".txt
         done
 done
