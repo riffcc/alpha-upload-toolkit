@@ -53,7 +53,7 @@ do
 		IFS=
 		metadata=$(curl -s 'https://archive.org/metadata/'$sourceName'/metadata')
 		sourceTitle=$(echo $metadata | jq '.result.title + " by " + .result.creator')
-		export sourceDescription=$(echo $metadata | jq '.result.description')
+		export sourceDescription=$(echo $metadata | jq '.result.description' | html2text)
                 # Run the special API upload script using our params
 		echo "Creating upload command in uploads.txt"
                 bash ~/upload-toolkit/fetcher/apiup-auto.sh "$torrentFilename" "https://archive.org/details/$sourceName" "$sourceTitle" >> uploads-"$timestamp".txt
