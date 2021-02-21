@@ -31,7 +31,8 @@ for (( i = $1; i <= $2; ++i ));
 do
 	echo "Grabbing a list of torrent URLs."
         # Grab a list of torrent URLs from our source.
-        torrent=$(wget -q -O- "https://archive.org/advancedsearch.php?q=collection%3A%22librivoxaudio%22&fl%5B%5D=downloads&sort%5B%5D=&sort%5B%5D=&sort%5B%5D=&rows=50&page=$i&callback=callback&save=yes&output=rss#raw" | awk -F'[<>]' '{ d[$2]=$3; if ($2=="/item" && index(d["description"],"BitTorrent") ) { print d["link"] } }' |parallel links -dump -html-numbered-links 1 | grep -o 'https://archive.org/.*torrent$' | sort -u)
+        torrent=$(cat /home/wings/upload-toolkit/fetcher/test.html | awk -F'[<>]' '{ d[$2]=$3; if ($2=="/item" && index(d["description"],"BitTorrent") ) { print d["link"] } }' |parallel links -dump -html-numbered-links 1 | grep -o 'https://archive.org/.*torrent$' | sort -u)
+#        torrent=$(wget -q -O- "https://archive.org/advancedsearch.php?q=collection%3A%22librivoxaudio%22&fl%5B%5D=downloads&sort%5B%5D=&sort%5B%5D=&sort%5B%5D=&rows=50&page=$i&callback=callback&save=yes&output=rss#raw" | awk -F'[<>]' '{ d[$2]=$3; if ($2=="/item" && index(d["description"],"BitTorrent") ) { print d["link"] } }' |parallel links -dump -html-numbered-links 1 | grep -o 'https://archive.org/.*torrent$' | sort -u)
 
         # Create a list of source URLs from the torrent URLs.
         sources=$(echo "$torrent" | awk 'BEGIN { FS = "/" } ; { print $5}')
@@ -53,10 +54,12 @@ do
 		IFS=
 		metadata=$(curl -s 'https://archive.org/metadata/'$sourceName'/metadata')
 		sourceTitle=$(echo $metadata | jq '.result.title + " by " + .result.creator')
-		export sourceDescription=$(echo $metadata | jq '.result.description' | html2text)
+		# Fetch the description of the content and throw it into a file.
+		curl -s 'https://archive.org/metadata/'$sourceName'/metadata/description' | jq '.result' | html2text -utf8 -nobs > description.tmp
                 # Run the special API upload script using our params
 		echo "Creating upload command in uploads.txt"
-                bash ~/upload-toolkit/fetcher/apiup-auto.sh "$torrentFilename" "https://archive.org/details/$sourceName" "$sourceTitle" >> uploads-"$timestamp".txt
+                python3 ~/upload-toolkit/fetcher/apiup-auto.py "$torrentFilename" "https://archive.org/details/$sourceName" "$sourceTitle"
+# >> uploads-"$timestamp".txt
 		echo >> uploads-"$timestamp".txt
 		unset IFS
         done
