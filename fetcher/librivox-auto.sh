@@ -2,8 +2,6 @@
 # Set the current date
 timestamp=$(date +"%F-T%H.%M.%S")
 
-echo $1
-echo $2
 set -x
 
 # Check if no numbers were provided.
@@ -46,6 +44,7 @@ do
         # Loop through the array and create a report of sources.
         for torrentURL in "${arr[@]}"
         do
+		echo "${arr[$torrentURL]}"
                 # Download the torrent file
 		echo "Downloading $torrentURL"
                 wget -q "$torrentURL" --content-disposition
