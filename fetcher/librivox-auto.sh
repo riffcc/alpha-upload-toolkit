@@ -59,5 +59,6 @@ do
 		echo "Creating upload command in uploads.txt"
                 bash ~/upload-toolkit/fetcher/apiup-auto.sh "$torrentFilename" "https://archive.org/details/$sourceName" "$sourceTitle" >> uploads-"$timestamp".txt
 		echo >> uploads-"$timestamp".txt
+		unset IFS
         done
 done
