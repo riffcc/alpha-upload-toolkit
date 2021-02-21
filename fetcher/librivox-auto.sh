@@ -2,8 +2,6 @@
 # Set the current date
 timestamp=$(date +"%F-T%H.%M.%S")
 
-set -x
-
 # Check if no numbers were provided.
 
 if [ -z "$1" ] || [ -z "$2" ]
@@ -44,7 +42,6 @@ do
         # Loop through the array and create a report of sources.
         for torrentURL in "${arr[@]}"
         do
-		echo "${arr[$torrentURL]}"
                 # Download the torrent file
 		echo "Downloading $torrentURL"
                 wget -q "$torrentURL" --content-disposition
@@ -52,9 +49,9 @@ do
                 torrentFilename=$(basename "$torrentURL")
                 # Set the name of the source we are working with
                 sourceName=$(echo "$torrentURL" | awk 'BEGIN { FS = "/" } ; { print $5}')
-		# Ugly hack to fetch the title of the source from its page. <3 nel!
+		# Fetch the title of the source from its page. <3 nel!
 		IFS=
-		sourceTitle=$(wget -qO- "https://archive.org/details/$sourceName" | grep "<title>" | sed 's/    <title>//; s/:/by/ ; s/ : Free Download, Borrow, and Streaming : Internet Archive<\/title>// ')
+		sourceTitle=$(curl -s 'https://archive.org/metadata/'$sourceName'/metadata' | jq '.result.title + " by " + .result.creator')
                 # Run the special API upload script using our params
 		echo "Creating upload command in uploads.txt"
                 bash ~/upload-toolkit/fetcher/apiup-auto.sh "$torrentFilename" "https://archive.org/details/$sourceName" "$sourceTitle" >> uploads-"$timestamp".txt
