@@ -51,7 +51,9 @@ do
                 sourceName=$(echo "$torrentURL" | awk 'BEGIN { FS = "/" } ; { print $5}')
 		# Fetch the title of the source from its page. <3 nel!
 		IFS=
-		sourceTitle=$(curl -s 'https://archive.org/metadata/'$sourceName'/metadata' | jq '.result.title + " by " + .result.creator')
+		metadata=$(curl -s 'https://archive.org/metadata/'$sourceName'/metadata')
+		sourceTitle=$(echo $metadata | jq '.result.title + " by " + .result.creator')
+		export sourceDescription=$(echo $metadata | jq '.result.description')
                 # Run the special API upload script using our params
 		echo "Creating upload command in uploads.txt"
                 bash ~/upload-toolkit/fetcher/apiup-auto.sh "$torrentFilename" "https://archive.org/details/$sourceName" "$sourceTitle" >> uploads-"$timestamp".txt
