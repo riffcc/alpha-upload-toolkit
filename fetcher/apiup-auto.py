@@ -8,17 +8,17 @@ import os
 # Enabling debugging at http.client level (requests->urllib3->http.client)
 # you will see the REQUEST, including HEADERS and DATA, and RESPONSE with HEADERS but without DATA.
 # the only thing missing will be the response.body which is not logged.
-try: # for Python 3
-    from http.client import HTTPConnection
-except ImportError:
-    from httplib import HTTPConnection
-HTTPConnection.debuglevel = 1
+#try: # for Python 3
+#    from http.client import HTTPConnection
+#except ImportError:
+#    from httplib import HTTPConnection
+#HTTPConnection.debuglevel = 1
 
-logging.basicConfig() # you need to initialize logging, otherwise you will not see anything from requests
-logging.getLogger().setLevel(logging.DEBUG)
-requests_log = logging.getLogger("urllib3")
-requests_log.setLevel(logging.DEBUG)
-requests_log.propagate = True
+#logging.basicConfig() # you need to initialize logging, otherwise you will not see anything from requests
+#logging.getLogger().setLevel(logging.DEBUG)
+#requests_log = logging.getLogger("urllib3")
+#requests_log.setLevel(logging.DEBUG)
+#requests_log.propagate = True
 
 headers = {'User-Agent': 'rcc-ut/1.0.1'}
 
@@ -29,9 +29,11 @@ apitoken = Path('/home/wings/.rcc-api').read_text()
 torrentdescription = Path('description.tmp').read_text()
 torrentname = str(sys.argv[3]).strip('"')
 
+print(str(sys.argv[1])+'\n\n'+torrentname+'\n\n'+str(sys.argv[2])+'\n\n'+torrentdescription)
+
 payload = {
     'nfo':'',
-    'name':str(sys.argv[3]),
+    'name':torrentname,
     'description':'Testing submission via Python. \n\n Source: '+str(sys.argv[2])+'\n\n'+torrentdescription,
     'mediainfo':'',
     'category_id':'10',
