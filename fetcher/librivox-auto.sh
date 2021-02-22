@@ -18,7 +18,7 @@ do
 	echo $(basename "$torrentName" .torrent)
 	releaseName=$(basename "$torrentName" .torrent)
 	# Fetch the name of our thing
-	echo metadata=$(curl -s 'https://archive.org/metadata/'$releaseName'/metadata')
+	metadata=$(curl -s 'https://archive.org/metadata/'$releaseName'/metadata')
 	sourceTitle=$(echo $metadata | jq '.result.title + " by " + .result.creator')
 	echo $sourceTitle
 	# Fetch the description of the content and throw it into a file.
