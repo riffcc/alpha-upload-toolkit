@@ -16,6 +16,7 @@ do
         # Create the release folder and hard link the files in
         cd $i
         mkdir "$sourceTitle"
+	ln -s $(pwd)/"$sourceTitle" ../
         ln * "$sourceTitle"/
         # Cleanup unneeded files
         rm "$sourceTitle"/*.png "$sourceTitle"/*.m4b "$sourceTitle"/*.xml "$sourceTitle"/*.sqlite "$sourceTitle"/*.json "$sourceTitle"/*.gz
