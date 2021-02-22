@@ -26,5 +26,4 @@ do
         # Run the special API upload script using our params
 	echo "Uploading $sourceTitle."
         echo python3 ~/upload-toolkit/fetcher/apiup-auto.py "$torrentName" "https://archive.org/details/$torrentName" "$sourceTitle"
-        done
 done
