@@ -1,1 +1,5 @@
+# Ignore testing data
 fetcher/librivox/*
+fetcher/gutenberg/*
+fetcher/torrentlist-*
+fetcher/*.html
