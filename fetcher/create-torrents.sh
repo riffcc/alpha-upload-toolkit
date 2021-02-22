@@ -18,8 +18,8 @@ do
         mkdir "$sourceTitle"
         ln * "$sourceTitle"/
         # Cleanup unneeded files
-        rm "$sourceTitle"/*.png "$sourceTitle"/*.json "$sourceTitle"/*.xml "$sourceTitle"/*.sqlite "$sourceTitle"/*.m4b "$sourceTitle"/*.gz
-        rm "$sourceTitle"/*.txt "$sourceTitle"/*.zip "$sourceTitle"/*_itemimage.jpg "$sourceTitle"/*_thumb.jpg
+        rm "$sourceTitle"/*.png "$sourceTitle"/*.m4b "$sourceTitle"/*.xml "$sourceTitle"/*.sqlite "$sourceTitle"/*.json "$sourceTitle"/*.gz
+        rm "$sourceTitle"/*.txt "$sourceTitle"/*.zip "$sourceTitle"/*.html "$sourceTitle"/*_itemimage.jpg "$sourceTitle"/*_thumb.jpg
         # Remove lower quality mp3s
         rm "$sourceTitle"/*_64kb.mp3
         find "$sourceTitle"/ -type f -iname "*.mp3" | grep -v _128kb.mp3 | xargs -d "\n" -I {} rm \{}
