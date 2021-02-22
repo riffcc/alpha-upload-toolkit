@@ -22,8 +22,8 @@ do
 	sourceTitle=$(echo $metadata | jq '.result.title + " by " + .result.creator')
 	echo $sourceTitle
 	# Fetch the description of the content and throw it into a file.
-	curl -s 'https://archive.org/metadata/'$sourceName'/metadata/description' | jq '.result' | html2text -utf8 -nobs > description.tmp
+	curl -s 'https://archive.org/metadata/'$releaseName'/metadata/description' | jq '.result' | html2text -utf8 -nobs > description.tmp
         # Run the special API upload script using our params
 	echo "Uploading $sourceTitle."
-        echo python3 ~/upload-toolkit/fetcher/apiup-auto.py "$torrentName" "https://archive.org/details/$torrentName" "$sourceTitle"
+        python3 ~/upload-toolkit/fetcher/apiup-auto.py "$torrentName" "https://archive.org/details/$torrentName" "$sourceTitle"
 done
