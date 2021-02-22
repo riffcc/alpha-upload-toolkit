@@ -6,7 +6,7 @@ set -x
 mapfile -t < <(ls -1 .)
 
 # Now let's enter the loop.
-for i in "${arr[@]}"
+for i in "${MAPFILE[@]}"
 do
 	if [ -z $i ]; then
 		echo "Name is empty"
@@ -25,14 +25,14 @@ do
 	fi
 
         # Create the release folder and hard link the files in
-        mkdir "$i/$sourceTitle"
-        ln * "$i/$sourceTitle"/
-	ln -s $(pwd)/"$i/$sourceTitle" .
+        mkdir "$sourceTitle"
+        ln "$i/"* "$sourceTitle"/
         # Cleanup unneeded files
-        rm "$i/$sourceTitle"/*.png "$i/$sourceTitle"/*.m4b "$i/$sourceTitle"/*.xml "$i/$sourceTitle"/*.sqlite "$i/$sourceTitle"/*.json "$i/$sourceTitle"/*.gz
-        rm "$i/$sourceTitle"/*.txt "$i/$sourceTitle"/*.zip "$i/$sourceTitle"/*.html "$i/$sourceTitle"/*_itemimage.jpg "$i/$sourceTitle"/*_thumb.jpg
+        rm "$sourceTitle"/*.png "$sourceTitle"/*.m4b "$sourceTitle"/*.xml "$sourceTitle"/*.sqlite "$sourceTitle"/*.json "$sourceTitle"/*.gz
+        rm "$sourceTitle"/*.txt "$sourceTitle"/*.zip "$sourceTitle"/*.html "$sourceTitle"/*_itemimage.jpg "$sourceTitle"/*_thumb.jpg
         # Remove lower quality mp3s
-        rm "$i/$sourceTitle"/*_64kb.mp3
-        find "$i/$sourceTitle"/ -type f -iname "*.mp3" | grep -v _128kb.mp3 | xargs -d "\n" -I {} rm \{}
-        ~/mktorrent.sh -n "$i" "$i/$sourceTitle"/
+        rm "$sourceTitle"/*_64kb.mp3
+        find "$sourceTitle"/ -type f -iname "*.mp3" | grep -v _128kb.mp3 | xargs -d "\n" -I {} rm \{}
+        ~/mktorrent.sh -n "$sourceTitle" -o "$i.torrent" "$sourceTitle"/
+	read -p "Press any key to keep going ..."
 done
