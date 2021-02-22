@@ -1,2 +1,2 @@
 #!/bin/bash
-mktorrent -p -a https://u.riff.cc/announce/replacemewithyourkey "${@}"
+mktorrent -p -a https://u.riff.cc/announce/`cat ~/.rcc-api` "${@}" -s "Riff.CC"

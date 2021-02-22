@@ -32,19 +32,8 @@ do
 	echo "Grabbing a list of torrent URLs."
         # Grab a list of torrent URLs from our source.
 	# When necessary, use a local snapshot to speed up the debug loop.
-        torrent=$(wget -q -O- "https://archive.org/advancedsearch.php?q=collection%3A%22librivoxaudio%22&fl%5B%5D=downloads&sort%5B%5D=&sort%5B%5D=&sort%5B%5D=&rows=50&page=$i&callback=callback&save=yes&output=rss#raw" | awk -F'[<>]' '{ d[$2]=$3; if ($2=="/item" && index(d["description"],"BitTorrent") ) { print d["link"] } }' | parallel links -dump -html-numbered-links 1 | grep -o 'https://archive.org/.*torrent$' | sort -u)
-
-        # Create a list of source URLs from the torrent URLs.
-        sources=$(echo "$torrent" | awk 'BEGIN { FS = "/" } ; { print $5}')
-
-	# Turn that into an array. https://stackoverflow.com/questions/9293887/reading-a-delimited-string-into-an-array-in-bash/53369525
-        arr=(`echo ${torrent}`);
-
-        # Loop through the array and create a report of sources.
-        for torrentURL in "${arr[@]}"
-        do
-                # Download the torrent file
-		echo "Downloading $torrentURL"
-                wget -q "$torrentURL" --content-disposition
-        done
+	# We use -q to silence wget,
+	# and we output to stdout before parsing and passing to various utilities to handle the actual downloading.
+        torrent=$(wget -O- "https://archive.org/advancedsearch.php?q=collection%3A%22librivoxaudio%22&fl%5B%5D=downloads&sort%5B%5D=&sort%5B%5D=&sort%5B%5D=&rows=1000000000&callback=callback&save=yes&output=rss#raw" | awk -F'[<>]' '{ d[$2]=$3; if ($2=="/item" && index(d["description"],"BitTorrent") ) { print d["link"] } }' | parallel links -dump -html-numbered-links 1 | grep -o 'https://archive.org/.*torrent$' | sort -u | head -n $1 | parallel wget -c -x)
+        #torrent=$(cat ~/upload-toolkit/fetcher/librivox.html | awk -F'[<>]' '{ d[$2]=$3; if ($2=="/item" && index(d["description"],"BitTorrent") ) { print d["link"] } }' | parallel links -dump -html-numbered-links 1 | grep -o 'https://archive.org/.*torrent$' | sort -u | head -n $1 | parallel wget -c -x)
 done
