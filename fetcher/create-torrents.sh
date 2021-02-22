@@ -26,3 +26,5 @@ do
         ~/mktorrent.sh -n "$i" "$sourceTitle"/
         cd ..
 done
+
+mv */*.torrent .
