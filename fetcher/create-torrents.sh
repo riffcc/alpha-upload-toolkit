@@ -1,4 +1,6 @@
 #!/bin/bash
+# Enable debugging
+set -x
 # Get a list of releases
 folders=$(ls -1 .)
 
@@ -31,7 +33,6 @@ do
         rm "$sourceTitle"/*_64kb.mp3
         find "$sourceTitle"/ -type f -iname "*.mp3" | grep -v _128kb.mp3 | xargs -d "\n" -I {} rm \{}
         ~/mktorrent.sh -n "$i" "$sourceTitle"/
+	mv "$i" ..
         cd ..
 done
-
-mv */*.torrent .
