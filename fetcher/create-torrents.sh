@@ -13,6 +13,12 @@ do
         sourceTitle=$(echo $metadata | jq -r '.result.title + " by " + .result.creator')
         echo $sourceTitle
 
+	if [ sourceTitle = " by " ]; then
+		echo "sourceTitle is empty. This means something went wrong."
+		echo "PANIK"
+		exit 1337
+	fi
+
         # Create the release folder and hard link the files in
         cd $i
         mkdir "$sourceTitle"
