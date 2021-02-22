@@ -23,6 +23,6 @@ do
         # Remove lower quality mp3s
         rm "$sourceTitle"/*_64kb.mp3
         find "$sourceTitle"/ -type f -iname "*.mp3" | grep -v _128kb.mp3 | xargs -d "\n" -I {} rm \{}
-        ~/mktorrent.sh -n "${arr[@]}" "$sourceTitle"/
+        ~/mktorrent.sh -n "$i" "$sourceTitle"/
         cd ..
 done
