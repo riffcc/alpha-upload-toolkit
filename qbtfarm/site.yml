@@ -73,6 +73,16 @@
       with_items:
         - "{{ daemons }}"
 
+    - name: Set up the temp dirs
+      file:
+        path: /home/qbittorrent/data{{ item }}
+        owner: qbittorrent
+        group: qbittorrent
+        mode: 0775
+        state: directory
+      with_items:
+        - "{{ daemons }}"
+
     - name: Manage the service files
       template:
         src: qbittorrent.service.j2
