@@ -5,6 +5,19 @@
 
   vars_files:
 
+  vars:
+    daemons:
+      - 81
+      - 82
+      - 83
+      - 84
+      - 85
+      - 86
+      - 87
+      - 88
+      - 89
+      - 90
+
   tasks:
     - name: Ensure nox is installed
       package:
@@ -12,40 +25,23 @@
 
     - name: Set up the configuration dirs
       file:
-        path: /home/qbittorrent/qBittorrent_{{ item }}
+        path: /home/qbittorrent/.config/qBittorrent_{{ item }}
         owner: qbittorrent
         group: qbittorrent
         mode: 0775
+        state: directory
       with_items:
-        - 81
-        - 82
-        - 83
-        - 84
-        - 85
-        - 86
-        - 87
-        - 88
-        - 89
-        - 90
+        - "{{ daemons }}"
 
     - name: Create the configuration files
       template:
         src: qbittorrent.conf.j2
-        dest: /home/qbittorrent/qBittorrent_{{ item }}/qBittorrent.conf
+        dest: /home/qbittorrent/.config/qBittorrent_{{ item }}/qBittorrent.conf
         owner: qbittorrent
         group: qbittorrent
         mode: 0664
       with_items:
-        - 81
-        - 82
-        - 83
-        - 84
-        - 85
-        - 86
-        - 87
-        - 88
-        - 89
-        - 90
+        - "{{ daemons }}"
 
     - name: Manage the service files
       template:
@@ -55,13 +51,4 @@
         group: root
         mode: 0755
       with_items:
-        - 81
-        - 82
-        - 83
-        - 84
-        - 85
-        - 86
-        - 87
-        - 88
-        - 89
-        - 90
+        - "{{ daemons }}"
