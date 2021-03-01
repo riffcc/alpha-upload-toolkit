@@ -1,5 +1,5 @@
 # Ignore testing data
-fetcher/librivox/*
-fetcher/gutenberg/*
-fetcher/torrentlist-*
-fetcher/*.html
+uploadbot/librivox/*
+uploadbot/gutenberg/*
+uploadbot/torrentlist-*
+uploadbot/*.html
