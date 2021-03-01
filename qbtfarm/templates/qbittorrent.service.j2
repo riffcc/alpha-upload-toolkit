@@ -1,0 +1,14 @@
+[Unit]
+Description=qBittorrent instance {{ qbt_instance }}
+After=network.target
+
+[Service]
+Type=forking
+User=qbittorrent
+Group=qbittorrent
+UMask=002
+ExecStart=/usr/bin/qbittorrent-nox -d --webui-port=808{{ qbt_instance }} --configuration={{ qbt_instance }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
