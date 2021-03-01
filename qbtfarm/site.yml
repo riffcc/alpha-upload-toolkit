@@ -2,8 +2,7 @@
 - name: qBitTorrent farm
   hosts: qbt
   become: true
-
-  vars_files:
+  gather_facts: false
 
   vars:
     daemons:
@@ -17,6 +16,27 @@
       - 88
       - 89
       - 90
+
+    qbt_watch1_81: x38
+    qbt_watch2_81: x31
+    qbt_watch1_82: x38
+    qbt_watch2_82: x32
+    qbt_watch1_83: x38
+    qbt_watch2_83: x33
+    qbt_watch1_84: x38
+    qbt_watch2_84: x34
+    qbt_watch1_85: x38
+    qbt_watch2_85: x35
+    qbt_watch1_86: x38
+    qbt_watch2_86: x36
+    qbt_watch1_87: x38
+    qbt_watch2_87: x37
+    qbt_watch1_88: x38
+    qbt_watch2_88: x38
+    qbt_watch1_89: x38
+    qbt_watch2_89: x39
+    qbt_watch1_90: x39
+    qbt_watch2_90: x30
 
   tasks:
     - name: Ensure nox is installed
@@ -40,6 +60,16 @@
         owner: qbittorrent
         group: qbittorrent
         mode: 0664
+      with_items:
+        - "{{ daemons }}"
+
+    - name: Set up the watch dirs
+      file:
+        path: /home/qbittorrent/watch{{ item }}
+        owner: qbittorrent
+        group: qbittorrent
+        mode: 0775
+        state: directory
       with_items:
         - "{{ daemons }}"
 
