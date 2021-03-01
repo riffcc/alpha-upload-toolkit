@@ -1,0 +1,12 @@
+---
+- name: qBitTorrent farm
+  hosts: qbt
+  become: true
+
+  vars_files:
+
+  tasks:
+    - name: Ensure nox is installed
+      package:
+        name: qbittorrent-nox
+
