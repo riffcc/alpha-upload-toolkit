@@ -52,3 +52,8 @@
         mode: 0755
       with_items:
         - "{{ daemons }}"
+
+    - name: Start the services
+      include_tasks: services.yml
+      with_items:
+        - "{{ daemons }}"
