@@ -3,3 +3,4 @@ uploadbot/librivox/*
 uploadbot/gutenberg/*
 uploadbot/torrentlist-*
 uploadbot/*.html
+uploadbot/wget-log
