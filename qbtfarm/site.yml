@@ -16,6 +16,15 @@
       - 88
       - 89
       - 90
+      - 91
+      - 92
+      - 93
+      - 94
+      - 95
+      - 96
+      - 97
+      - 98
+      - 99
 
     qbt_watch1_81: x38
     qbt_watch2_81: x31
@@ -37,11 +46,35 @@
     qbt_watch2_89: x39
     qbt_watch1_90: x39
     qbt_watch2_90: x30
+    qbt_watch1_91: x39
+    qbt_watch2_91: x31
+    qbt_watch1_92: x39
+    qbt_watch2_92: x32
+    qbt_watch1_93: x39
+    qbt_watch2_93: x33
+    qbt_watch1_94: x39
+    qbt_watch2_94: x34
+    qbt_watch1_95: x39
+    qbt_watch2_95: x35
+    qbt_watch1_96: x39
+    qbt_watch2_96: x36
+    qbt_watch1_97: x39
+    qbt_watch2_97: x37
+    qbt_watch1_98: x39
+    qbt_watch2_98: x38
+    qbt_watch1_99: x39
+    qbt_watch2_99: x39
 
   tasks:
     - name: Ensure nox is installed
       package:
         name: qbittorrent-nox
+
+    - name: Create our user
+      ansible.builtin.user:
+        name: qbittorrent
+        comment: QBT Farm
+        uid: 23337
 
     - name: Set up the configuration dirs
       file:
