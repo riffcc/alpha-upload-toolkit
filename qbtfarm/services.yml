@@ -1,11 +1,11 @@
 - name: Remove the lock
   file:
-    path: "/tmp/qtsingleapp-qBitto-624a-3e5"
+    path: "/tmp/qtsingleapp-qBitto-d590-5b29"
     state: absent
 
 - name: Remove the lockfile
   file:
-    path: "/tmp/qtsingleapp-qBitto-624a-3e5-lockfile"
+    path: "/tmp/qtsingleapp-qBitto-d590-5b29-lockfile"
     state: absent
 
 - name: Start qBitTorrent instances
