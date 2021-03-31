@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import requests
 import logging
 import sys
@@ -26,15 +27,16 @@ test_file = open(str(sys.argv[1]), "rb")
 
 from pathlib import Path
 apitoken = Path('/home/wings/.rcc-api').read_text()
-torrentdescription = Path('description.tmp').read_text()
-torrentname = str(sys.argv[3]).strip('"')
+torrentdescription = Path('description-'+str(sys.argv[2])+'.tmp').read_text()
+
+torrentname = str(sys.argv[4]).strip('"')
 
 print(str(sys.argv[1])+'\n\n'+torrentname+'\n\n'+str(sys.argv[2])+'\n\n'+torrentdescription)
 
 payload = {
     'nfo':'',
     'name':torrentname,
-    'description':'Testing submission via Python. \n\n Source: '+str(sys.argv[2])+'\n\n'+torrentdescription,
+    'description':'Testing submission via Python. \n\n Source: '+str(sys.argv[3])+'\n\n'+torrentdescription,
     'mediainfo':'',
     'category_id':'10',
     'type_id':'21',
