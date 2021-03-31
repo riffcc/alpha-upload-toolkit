@@ -21,4 +21,4 @@ do
 done >> torrentlist-$timestamp.txt
 
 # Now grab all those torrents.
-cat torrentlist-$timestamp.txt | parallel -j 20 wget -c -x
+cat torrentlist-$timestamp.txt | parallel -j 2000 wget -c -x
