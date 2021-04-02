@@ -1,4 +1,5 @@
 #!/bin/bash
+# wings@fc2:~/upload-toolkit/uploadbot/gutenberg/archive.org$ find download/ -type f -exec cp  {} out/ \;
 # Set the current date
 timestamp=$(date +"%F-T%H.%M.%S")
 
