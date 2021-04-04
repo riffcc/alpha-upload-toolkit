@@ -1,5 +1,6 @@
 #!/bin/bash
 # wings@fc2:~/upload-toolkit/uploadbot/gutenberg/archive.org$ find download/ -type f -exec cp  {} out/ \;
+# media@fc2:/mnt/radio/watch1$ find ~wings/upload-toolkit/uploadbot/gutenberg/archive.org/out/torrents1 -type f -exec cp  {} . \;
 # Set the current date
 timestamp=$(date +"%F-T%H.%M.%S")
 
