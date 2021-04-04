@@ -3,6 +3,7 @@
 timestamp=$(date +"%F-T%H.%M.%S")
 
 # Switch to the appropriate directory.
+mkdir -p tedtalks
 cd tedtalks
 echo "Thanks for using Riff.CC Upload Toolkit!"
 echo "Grabbing a list of torrent URLs."
