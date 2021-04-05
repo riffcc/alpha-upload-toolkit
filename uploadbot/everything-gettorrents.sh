@@ -24,7 +24,6 @@ pueblo_nuevo
 lostfrog
 mixgalaxy-records
 enough_records
-irdial
 monokrak
 cianorbe
 oloil
@@ -41,7 +40,6 @@ miasmah
 petroglyph-music
 dienstbar
 ogredung
-monokrak
 dubophonic
 irish-metal-archive
 restingbell
