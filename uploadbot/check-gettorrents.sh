@@ -11,6 +11,7 @@ timestamp=$(date +"%F-T%H.%M.%S")
 echo "Thanks for using Riff.CC Upload Toolkit!"
 echo "Running at $timestamp"
 collections=(
+gutenberg
 librivoxaudio
 tedtalks
 netwaves
@@ -203,18 +204,9 @@ do
 	mkdir -p grabber/$i
 	cd grabber/$i
 
-	# Parse our content list and grab a list of releases
-	releaseNames=$(cat ../../collections/$i.html | awk -F'[<>]' '{ d[$2]=$3; if ($2=="/item" && index(d["description"],"BitTorrent") ) { print d["link"] } }' | awk 'BEGIN { FS = "/" } ; { print $5}')
-	arr=(`echo ${releaseNames}`);
-
-	# Parse our list of releases and create a list of torrent URLs
-	for releaseName in "${arr[@]}"
-	do
-		echo "https://archive.org/download/"$releaseName"/"$releaseName"_archive.torrent"
-	done >> torrentlist-$timestamp.txt
-
-	# Now grab all those torrents.
-	cat torrentlist-$timestamp.txt | parallel -j 1000 wget -c -x
+	# Parse our content list and grab a list of releases, then count it
+	releaseNames=$(cat ../../collections/$i.html | awk -F'[<>]' '{ d[$2]=$3; if ($2=="/item" && index(d["description"],"BitTorrent") ) { print d["link"] } }' | awk 'BEGIN { FS = "/" } ; { print $5}' | wc -l)
+	echo $releaseNames
 
 	# Change to the uploadbot directory
 	cd ~/upload-toolkit/uploadbot
