@@ -50,7 +50,7 @@ do
 		echo "Failed on $releaseName" >> /home/media/failures.log
 	fi
 
-	if [ "$sourceTitle" != " by " ]; then
+	if [ ! "$sourceTitle" == " by " ] && [ ! "$sourceTitle" == "" ]; then
 		# Create the release folder and hard link the files in
 		echo "Creating folders."
 		mkdir -p "/home/media/release/$sourceTitle" || { echo 'Failed to create folders! Exiting.' ; exit 1; }
@@ -66,7 +66,7 @@ do
 		rm "/home/media/release/$sourceTitle"/*_64kb.mp3 2>/dev/null
 		find "/home/media/release/$sourceTitle"/ -type f -iname "*.mp3" | grep -v _128kb.mp3 | xargs -d "\n" -I {} rm \{\} 2>/dev/null
 		echo "Building the torrent!"
-		/home/media/mktorrent.sh -n "$sourceTitle" -o "$releaseName.torrent" "/home/media/release/$sourceTitle"/
+		/home/media/mktorrent.sh -n "$sourceTitle" -o "torrents/$releaseName.torrent" "/home/media/release/$sourceTitle"/
 		#read -p "Press any key to keep going ..."
 	fi
 done
