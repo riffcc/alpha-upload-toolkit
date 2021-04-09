@@ -36,7 +36,7 @@ do
         # Fetch the title of the release
         metadata=$(curl -s "https://archive.org/metadata/$releaseName/metadata")
         sourceTitle=$(echo "$metadata" | jq '.result.title + " by " + (try (.result.creator | join(", ")) catch false // .result.creator)')
-	sourceTitleOnly=$(echo "$metadata" | jq '.result.title)
+	sourceTitleOnly=$(echo "$metadata" | jq '.result.title')
         echo "Title: $sourceTitle"
 
 	if [ "$sourceTitle" == " by " ]; then
