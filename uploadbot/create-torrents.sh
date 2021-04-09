@@ -35,7 +35,7 @@ do
 	echo "Grabbing the title for $releaseName"
         # Fetch the title of the release
         metadata=$(curl -s "https://archive.org/metadata/$releaseName/metadata")
-        sourceTitle=$(echo "$metadata" | jq -r '.result.title + " by " + .result.creator')
+        sourceTitle=$(echo "$metadata" | jq '.result.title + " by " + (try (.result.creator | join(", ")) catch false // .result.creator)')
         echo "Title: $sourceTitle"
 
 	if [ "$sourceTitle" == " by " ]; then

@@ -25,3 +25,6 @@ exiftool -r -ext MP3 '-filename<$Track - $Title.%e' . && exiftool -r -ext MP3 '-
 
 ## Windows
 Proper instructions on using the toolkit are coming soon, I promise.
+
+## Credits
+Many thanks to nel, nug, and mesquka.
