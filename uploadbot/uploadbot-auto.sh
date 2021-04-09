@@ -28,7 +28,8 @@ do
         fi
 	# Fetch the name of our thing
 	metadata=$(curl -s 'https://archive.org/metadata/'$releaseName'/metadata')
-	sourceTitle=$(echo $metadata | jq '.result.title + " by " + .result.creator')
+	#sourceTitle=$(echo $metadata | jq '.result.title + " by " + .result.creator')
+	sourceTitle=$(echo "$metadata" | jq '.result.title + " by " + (try (.result.creator | join(", ")) catch false // .result.creator)')
 	echo $sourceTitle
         if [ "$sourceTitle" == '" by "' ]; then
                 echo "sourceTitle is empty. This means something went wrong."
