@@ -45,13 +45,13 @@ do
 	if [ "$sourceTitle" == " by " ]; then
 		echo "sourceTitle is empty. This means something went wrong."
 		echo "Skipping and logging the issue."
-		echo "Failed on $releaseName" >> /home/media/failures.log
+		echo "Failed on $releaseName" >> /home/media/logs/failures.log
 	fi
 
 	if [ "$sourceTitle" == "" ]; then
 		echo "sourceTitle is empty. This means something went wrong."
 		echo "Skipping and logging the issue."
-		echo "Failed on $releaseName" >> /home/media/failures.log
+		echo "Failed on $releaseName" >> /home/media/logs/failures.log
 	fi
 
 	if [ ! "$sourceTitle" == " by " ] && [ ! "$sourceTitle" == "" ]; then
