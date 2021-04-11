@@ -36,8 +36,8 @@ do
         metadata=$(curl -s "https://archive.org/metadata/$releaseName/metadata")
         sourceTitle=$(echo "$metadata" | jq '.result.title + " by " + (try (.result.creator | join(", ")) catch false // .result.creator)')
 	# Automatically trim the title if needed, to avoid issues with folder creation.
-	if [ "${#sourceTitle}" -ge 50 ]; then
-		sourceTitle="${sourceTitle:0:50}..."
+	if [ "${#sourceTitle}" -ge 150 ]; then
+		sourceTitle="${sourceTitle:0:150}..."
 		echo $sourceTitle
 	fi
         echo "Title: $sourceTitle"
