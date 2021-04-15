@@ -64,9 +64,9 @@ do
 		cp -H "/mfsbrick.3/final1/$releaseName/"* "/home/media/release/$sourceTitle"/ 2>/dev/null
 		# Cleanup unneeded files
 		echo "Cleaning up unneeded files."
-		rm "/home/media/release/$sourceTitle"/*.png "/home/media/release/$sourceTitle"/*.m4b "/home/media/release/$sourceTitle"/*.xml "/home/media/release/$sourceTitle"/*.sqlite "/home/media/release/$sourceTitle"/*.json "/home/media/release/$sourceTitle"/*.gz 2>/dev/null
-		rm "/home/media/release/$sourceTitle"/*.txt "/home/media/release/$sourceTitle"/*.zip "/home/media/release/$sourceTitle"/*.html "/home/media/release/$sourceTitle"/*_itemimage.jpg "/home/media/release/$sourceTitle"/*_thumb.jpg 2>/dev/null
-		rm "/home/media/release/$sourceTitle"/*.ogg 2>/dev/null
+		rm -f "/home/media/release/$sourceTitle"/*.png "/home/media/release/$sourceTitle"/*.m4b "/home/media/release/$sourceTitle"/*.xml "/home/media/release/$sourceTitle"/*.sqlite "/home/media/release/$sourceTitle"/*.json "/home/media/release/$sourceTitle"/*.gz
+		rm -f "/home/media/release/$sourceTitle"/*.txt "/home/media/release/$sourceTitle"/*.zip "/home/media/release/$sourceTitle"/*.html "/home/media/release/$sourceTitle"/*_itemimage.jpg "/home/media/release/$sourceTitle"/*_thumb.jpg
+		rm -f "/home/media/release/$sourceTitle"/*.ogg
 		# Remove lower quality mp3s
 		echo "Removing lower quality mp3s."
 		rm "/home/media/release/$sourceTitle"/*_64kb.mp3 2>/dev/null
