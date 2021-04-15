@@ -38,13 +38,8 @@ do
         # Fetch the title of the release
         metadata=$(curl -s "https://archive.org/metadata/$releaseName/metadata")
         sourceTitle=$(echo "$metadata" | jq '.result.title + " by " + (try (.result.creator | join(", ")) catch false // .result.creator)')
-	# Automatically trim the title if needed, to avoid issues with folder creation.
-	if [ "${#sourceTitle}" -ge 150 ]; then
-		sourceTitle="${sourceTitle:0:150}..."
-		echo $sourceTitle
-	fi
-        echo "Title: $sourceTitle"
 
+	# Detect if the sourceTitle is empty or wrong
 	if [ "$sourceTitle" == " by " ]; then
 		echo "sourceTitle is empty. This means something went wrong."
 		echo "Skipping and logging the issue."
@@ -56,6 +51,13 @@ do
 		echo "Skipping and logging the issue."
 		echo "Failed on $releaseName" >> /home/media/logs/failures.log
 	fi
+
+	# Automatically trim the title if needed, to avoid issues with folder creation.
+	if [ "${#sourceTitle}" -ge 150 ]; then
+		sourceTitle="${sourceTitle:0:150}..."
+		echo $sourceTitle
+	fi
+        echo "Title: $sourceTitle"
 
 	if [ ! "$sourceTitle" == " by " ] && [ ! "$sourceTitle" == "" ]; then
 		# Create the release folder and hard link the files in
