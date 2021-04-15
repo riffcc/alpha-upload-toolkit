@@ -20,8 +20,11 @@ counter=1
 # Now let's enter the loop.
 for i in "${MAPFILE[@]}"
 do
+	# Print which loop we're in
 	echo "We are on loop #$counter."
 	counter=$((counter + 1))
+	# Print how many files exist so far
+	echo "Releases: $(find ~media/release/ -maxdepth 1 -type d | wc -l)"
 
 	echo Processing: "$i"
 	releaseName=${i}
@@ -73,5 +76,7 @@ do
 		find "/home/media/release/$sourceTitle"/ -type f -iname "*.mp3" | grep -v _128kb.mp3 | xargs -d "\n" -I {} rm \{\} 2>/dev/null
 		echo "Building the torrent!"
 		/home/media/mktorrent.sh -n "$sourceTitle" -o "torrents/$releaseName.torrent" "/home/media/release/$sourceTitle"
+		echo "We are on loop #$(($counter- 1))"
+	        echo "Torrents: $(find ~media/torrents/ -maxdepth 1 -type f | wc -l)"
 	fi
 done
