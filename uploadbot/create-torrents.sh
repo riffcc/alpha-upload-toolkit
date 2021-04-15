@@ -1,6 +1,6 @@
 #!/bin/bash
 # Enable debugging
-#set -x
+set -x
 
 echo "Welcome to the Riff.CC toolkit! Let's have some fun."
 
