@@ -9,11 +9,9 @@ Start by changing "replacemewithyourkey" with your announce key. You can find it
 
 Make sure you have a recent version of mktorrent installed. Then copy mktorrent.sh to ~ and make it executable.
 
-create-everything.sh can be used for creating massive amounts of torrents from anything stored in folders.
+create-torrents.sh is used to prepare uploads.
 
-create-everything-bare.sh can be used for creating torrents from files not currently stored in folders. (In a future version, these two scripts will be merged!)
-
-move-torrents.sh is used to move torrent files into the processing folders.
+move-torrents.sh is used to move torrent files into place to be split and then copied into watch folders
 
 sort-torrents.sh has the special job of sorting your torrents, keeping only the best available quality of each potential upload.
 
