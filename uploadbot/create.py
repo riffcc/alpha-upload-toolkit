@@ -1,12 +1,16 @@
 #!/usr/bin/python3
 # Python3 script to produce torrent files from existing files and folders
 import os
+import subprocess
 
 # Get a list of files
-o=os.system('find /tmp/test/ -maxdepth 1 -type d -not -wholename "/mfsbrick.3/final1/" -not -name
-"." -not -name ".."').read()
+ret = os.popen('find /tmp/test -maxdepth 1 -type d -not -wholename "/mfsbrick.3/final1/" -not -name "." -not -name ".."')
 
-print(o)
+#child = subprocess.Popen(['find /tmp/test'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+print(ret.read(), end = '')
+
+print(ret.read[0])
 
 ##!/bin/bash
 ## Enable debugging
