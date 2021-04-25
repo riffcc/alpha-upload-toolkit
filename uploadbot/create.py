@@ -46,6 +46,8 @@ for download in dirs:
 	# Set our directory name
 	targetdirname = title + " by " + creator
 
+	print(targetdirname)
+
 	logger.info("Trying to create release " + download + " as " + targetdirname)
 	try:
 		os.mkdir(path + "/" + targetdirname)
