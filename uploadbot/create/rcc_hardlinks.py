@@ -17,10 +17,13 @@ dirs=os.listdir(fromPath)
 print(dirs)
 
 # Set up logging
-# TODO datestamp
 logger = logging.getLogger('loggerLogger')
 
-handler = logging.FileHandler('logs/hardlinks.log')
+import datetime
+now = datetime.datetime.now()
+
+timestamp = now.strftime('%Y-%m-%d-T-%H.%M.%S')
+handler = logging.FileHandler('logs/hardlinks-' + timestamp + '.log')
 logger.addHandler(handler)
 
 for download in dirs:

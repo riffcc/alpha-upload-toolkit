@@ -9,6 +9,6 @@ import shutil
 import logging
 from internetarchive import get_item
 
-#import rcc_hardlinks
+import rcc_hardlinks
 import rcc_cleanup
 # import rcc_torrent

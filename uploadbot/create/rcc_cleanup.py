@@ -22,7 +22,7 @@ import datetime
 now = datetime.datetime.now()
 
 timestamp = now.strftime('%Y-%m-%d-T-%H.%M.%S')
-handler = logging.FileHandler('logs/hardlinks-' + timestamp + '.log')
+handler = logging.FileHandler('logs/cleanup-' + timestamp + '.log')
 logger.addHandler(handler)
 
 # Set the source directory (fromPath) and the place with our releases (toPath)
