@@ -13,8 +13,8 @@ from internetarchive import get_item
 
 # Set the source directory (fromPath) and the place we want to build our releases (toPath)
 fromPath="/mfsbrick.3/debug"
-toPath="/mfsbrick.3/release"
-dirs=os.listdir(fromPath)
+toPath="/mfsbrick.3/debug2"
+dirs = ["pointsofhumourpa44572gut"]
 print(dirs)
 
 # Set up logging

@@ -6,9 +6,13 @@ maxlength = 210 # max length a name can be before it is truncated
 
 # Import needed libraries
 import os
+import time
 import shutil
 import logging
 from internetarchive import get_item
+
+# Grab the start time for the script
+startTime = time.time()
 
 # Set the source directory (fromPath) and the place we want to build our releases (toPath)
 fromPath="/mfsbrick.3/final1"
@@ -71,3 +75,7 @@ for download in dirs:
 	# DEBUG
 	#shutil.copytree(fromPath + "/" + download, toPath + "/" + targetdirname, copy_function=os.link)
 	#print(title + " by " + creator)
+
+print("Run started at "+ timestamp +" is now complete! Thanks for playing!")
+executionTime = (time.time() - startTime)
+print('Execution time in seconds: ' + str(executionTime))
