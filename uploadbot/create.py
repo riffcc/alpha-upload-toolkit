@@ -1,10 +1,16 @@
 #!/usr/bin/python3
 # Python3 script to produce torrent files from existing files and folders
 # This script currently only works for archive.org releases.
+
+# Set some initial settings
+extensionsToRemove = [ "HELLO", ".png", ".m4b", ".xml", ".sqlite", ".json", ".gz", ".txt", ".zip", ".html", ".jpg", "_itemimage.jpg", "_thumb.jpg", ".ogg" ]
+qualitiesToRemove = [ "_64kb.mp3"]
+
 import os
 import shutil
 import logging
 from internetarchive import get_item
+
 
 # Create a log file for the jobs.
 logger = logging.getLogger('loggerLogger')
@@ -21,7 +27,7 @@ dirs=os.listdir(path)
 print(dirs)
 
 for download in dirs:
-	# Fetch metadata from archive.org for the item, then pull out data
+	# Fetch metadata from archive.org for the item", then pull out data
 	item = get_item(download)
 	try:
 		title = item.item_metadata['metadata']['title']
@@ -52,8 +58,21 @@ for download in dirs:
 	logger.info("Trying to create release " + download + " as " + targetdirname)
 	try:
 		#os.mkdir(path + "/" + targetdirname)
-		shutil.copytree(download, targetdirname, copy_function=os.link)
+		shutil.copytree(path + "/" + download, path + "/" + targetdirname, copy_function=os.link)
 	except:
 		print("Failed creating directory for: "+ download)
 		logger.error("Failed creating directory for: "+ download)		
 	print(title + " by " + creator)
+
+	for root,dirs,files in os.walk(path + "/" + targetdirname):
+		for file in files:
+			testFile = os.path.join(root,file)
+			print(testFile)
+			if(testFile.endswith(tuple(extensionsToRemove))):
+				print("Removing (failed extension): " +testFile)
+				os.unlink(testFile)
+
+			if(testFile.endswith(tuple(qualitiesToRemove))):
+				print("Removing (failed quality): " +testFile)
+				os.unlink(testFile)
+
