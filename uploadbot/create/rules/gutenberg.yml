@@ -1,0 +1,18 @@
+---
+# example config file
+extensions:
+    - ".png"
+    - ".m4b"
+    - ".xml"
+    - ".sqlite"
+    - ".json"
+    - ".gz"
+    - ".txt"
+    - ".zip"
+    - ".html"
+    - ".jpg"
+    - "_itemimage.jpg"
+    - "_thumb.jpg"
+
+qualities:
+    - this_page_intentionally_left_blank
