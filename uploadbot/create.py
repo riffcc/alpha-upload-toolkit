@@ -2,6 +2,7 @@
 # Python3 script to produce torrent files from existing files and folders
 # This script currently only works for archive.org releases.
 import os
+import shutil
 import logging
 from internetarchive import get_item
 
@@ -50,7 +51,8 @@ for download in dirs:
 
 	logger.info("Trying to create release " + download + " as " + targetdirname)
 	try:
-		os.mkdir(path + "/" + targetdirname)
+		#os.mkdir(path + "/" + targetdirname)
+		shutil.copytree(download, targetdirname, copy_function=os.link)
 	except:
 		print("Failed creating directory for: "+ download)
 		logger.error("Failed creating directory for: "+ download)		
