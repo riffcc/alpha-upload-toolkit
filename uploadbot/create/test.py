@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # Create perfect hard linked copies of the files contained in each release.
+print("hello")
 
 # Settings
 maxlength = 210 # max length a name can be before it is truncated
@@ -11,7 +12,7 @@ import logging
 from internetarchive import get_item
 
 # Set the source directory (fromPath) and the place we want to build our releases (toPath)
-fromPath="/mfsbrick.3/final1"
+fromPath="/mfsbrick.3/debug"
 toPath="/mfsbrick.3/release"
 dirs=os.listdir(fromPath)
 print(dirs)

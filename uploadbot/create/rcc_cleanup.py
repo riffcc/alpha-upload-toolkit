@@ -12,7 +12,7 @@ import logging
 from internetarchive import get_item
 
 # Settings
-maxlength = 250 # max length a name can be before it is truncated
+maxlength = 210 # max length a name can be before it is truncated
 
 # Set up logging
 # TODO datestamp
