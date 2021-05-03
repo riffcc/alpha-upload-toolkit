@@ -9,5 +9,5 @@ Proper documentation coming soon, but the general idea is:
 
 # TODO
 * figure out a better way to handle titles, as we may end up with multiple books in the same folder if they share a title!
-* truncate very long titles with ...
 * (possibly) turn author lists into "Various creators" when there is more than 2 authors
+* global config
