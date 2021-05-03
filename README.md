@@ -4,6 +4,9 @@ Tools to assist with uploading to Riff.CC
 Used for automating the uploads process. This is only needed if you are uploading movies and TV, or if you want to bulk create torrents using Linux.
 
 # Instructions
+## Pre-requisites
+"internetarchive" python module (hint: pip3 install internetarchive)
+
 ## Linux
 Start by changing "replacemewithyourkey" with your announce key. You can find it on the Upload page! Then create ~/processing and ~/processing2.
 
