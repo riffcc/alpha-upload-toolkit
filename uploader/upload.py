@@ -3,31 +3,16 @@ import requests
 import logging
 import sys
 import os
-
-#print(os.getcwd())
-
-# Enabling debugging at http.client level (requests->urllib3->http.client)
-# you will see the REQUEST, including HEADERS and DATA, and RESPONSE with HEADERS but without DATA.
-# the only thing missing will be the response.body which is not logged.
-#try: # for Python 3
-#    from http.client import HTTPConnection
-#except ImportError:
-#    from httplib import HTTPConnection
-#HTTPConnection.debuglevel = 1
-
-#logging.basicConfig() # you need to initialize logging, otherwise you will not see anything from requests
-#logging.getLogger().setLevel(logging.DEBUG)
-#requests_log = logging.getLogger("urllib3")
-#requests_log.setLevel(logging.DEBUG)
-#requests_log.propagate = True
+from pathlib import Path
 
 headers = {'User-Agent': 'rcc-ut/1.0.1'}
 
 test_file = open(str(sys.argv[1]), "rb")
 
 from pathlib import Path
-apitoken = Path('/home/wings/.rcc-api').read_text()
-torrentdescription = Path('description-'+str(sys.argv[2])+'.tmp').read_text()
+apitoken = Path(Path.home()+"/.rcc-api').read_text()
+
+description = Path('description-'+str(sys.argv[2])+'.tmp').read_text()
 
 torrentname = str(sys.argv[4]).strip('"')
 

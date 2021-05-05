@@ -1,6 +1,7 @@
 # Ignore testing data
-uploadbot/wget-log
-uploadbot/logs
+wget-log
+logs
 # Ignore the files themselves
 collections/
 grabber/
+logs/
